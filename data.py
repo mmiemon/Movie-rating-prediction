@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import sys
+import shutil
 import zipfile
 import numpy as np
 import nltk
@@ -8,7 +9,7 @@ import string
 import matplotlib.pyplot as plt
 from nltk.corpus import stopwords
 import os
-nltk.download('stopwords')
+#nltk.download('stopwords')
 
 
 def load_zip(filepath):
@@ -17,10 +18,10 @@ def load_zip(filepath):
 
 with zipfile.ZipFile(sys.argv[1],"r") as zip_ref:
         zip_ref.extractall(".")
-
+        
     
 with open('Movies_and_TV_5.json') as f:
-    raw_data = [eval(x) for x in f.readlines()[0:10000]]
+    raw_data = [eval(x) for x in f.readlines()[0:100]]
 
 #with open('ratings.txt', 'w') as f:
 #    f.write('reviewerID,asin,overall\n')
@@ -142,6 +143,9 @@ ratings_10_train = ratings[0:int(.2*l)]
 feat_90_train = reviews_feats[0:int(.6*l)]
 ratings_90_train = ratings[0:int(.6*l)]
 
+feat_3_sample_val = feat_10_val[0:3]
+ratings_3_sample_val = ratings_10_val[0:3]
+
 #np.save('Temp\processed_data.npy', {'features': reviews_feats,
 #                               'ratings': ratings})
 
@@ -150,6 +154,7 @@ val_10_path = 'Data/Validation/Validation_10_Percent'
 test_10_path = 'Data/Test/Test_10_Percent'
 train_10min_path = 'Data/Train/Under_10_min_training'
 tune_90min_path = 'Data/Train/Under_90_min_tuning'
+val_3_sample_path = 'Data/Validation/3_samples'
     
 
 save_zip(feat_80, ratings_80, train_80_path)
@@ -157,6 +162,17 @@ save_zip(feat_10_val, ratings_10_val, val_10_path)
 save_zip(feat_10_test, ratings_10_test, test_10_path)
 save_zip(feat_10_train, ratings_10_train, train_10min_path)
 save_zip(feat_90_train, ratings_90_train, tune_90min_path)
+save_zip(feat_3_sample_val, ratings_3_sample_val, val_3_sample_path)
+
+if os.path.exists('Movies_and_TV_5.json'):
+    os.remove('Movies_and_TV_5.json')
+if os.path.isdir('Temp'):
+    shutil.rmtree('Temp')
+
+
+
+
+
 
 
 
