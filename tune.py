@@ -2,6 +2,7 @@ import train
 import zipfile
 import os
 import sys
+import shutil
 
 models = ["lstm", "mlp", "covNet"]
 layers = [
@@ -34,7 +35,7 @@ best_model = ""
 best_hyperparameter = ""
 for i in range(len(models)):
     for j in range(len(layers[i])):
-        print("Model ",i,j)
+        print("Model ",models[i],j)
         rmse = train.training(models[i], layers[i][j], 0)
         
         f.write('{}, {}, {}\n'.format(models[i], layers[i][j], rmse))
@@ -51,4 +52,6 @@ f.close()
 f = open('hyperparameter.txt', 'w')
 f.write('{}, {}, {}\n'.format(best_model, best_hyperparameter, best_rmse))
 f.close()
+
+
 
