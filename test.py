@@ -3,6 +3,7 @@ import zipfile
 import os
 import sys
 import numpy as np
+import shutil
 import tensorflow as tf
 from keras.models import Sequential
 from keras.layers import CuDNNLSTM, Dense, LSTM, Convolution1D, Flatten
@@ -48,3 +49,5 @@ loaded_model.compile(loss='mse',
 results = loaded_model.evaluate(X_test, y_test, verbose=1)
 
 print('Test RMSE: {}'.format(results[0]**0.5))
+if os.path.isdir('Temp'):
+    shutil.rmtree('Temp')
