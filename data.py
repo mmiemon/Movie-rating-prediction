@@ -9,7 +9,7 @@ import string
 import matplotlib.pyplot as plt
 from nltk.corpus import stopwords
 import os
-#nltk.download('stopwords')
+nltk.download('stopwords')
 
 
 def load_zip(filepath):
@@ -21,7 +21,7 @@ with zipfile.ZipFile(sys.argv[1],"r") as zip_ref:
         
     
 with open('Movies_and_TV_5.json') as f:
-    raw_data = [eval(x) for x in f.readlines()[0:100]]
+    raw_data = [eval(x) for x in f.readlines()[0:10000]]
 
 #with open('ratings.txt', 'w') as f:
 #    f.write('reviewerID,asin,overall\n')
