@@ -177,7 +177,8 @@ def training(model, output, isTrain):
     
 
 if (len(sys.argv) > 1 and sys.argv[2]==".\hyperparameter.txt"):
-    os.remove("Temp/Train_80_Percent.npy")
+    if os.path.exists('Temp/Train_80_Percent.npy'):
+        os.remove("Temp/Train_80_Percent.npy")
     with zipfile.ZipFile(sys.argv[1],"r") as zip_ref:
         zip_ref.extractall(".")
     os.rename("Temp/processed_data.npy","Temp/Train_80_Percent.npy")
@@ -197,4 +198,6 @@ if (len(sys.argv) > 1 and sys.argv[2]==".\hyperparameter.txt"):
         rmse = training(model, output, 1)
     print(model, rmse)
     f.close()
+
+
 
