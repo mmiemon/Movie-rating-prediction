@@ -37,11 +37,16 @@ Lib\ :- Any other code, library you need
 Tmp\ :- Created runtime. All temporary data should reside in this folder. Deleted at the end of execution. 
 
 
+
 Execution order is given below. We will assume that current directory is your project folder.
 Following script is for windows. For linux the python command will not contain .exe extention. Command line arguments in the same line with python command are input files. Following files are output files.
+
 ###############################################################################################################################################################
+
 md Tmp
+
 script.bat
+
 python.exe data.py .\Data\data.zip 
 .\Data\Train\Best_hyperparameter_80_percent\ 
 .\Data\Validation\Validation_10_percent\ 
@@ -58,7 +63,9 @@ python.exe train.py .\Data\Train\Best_hyperparameter_80_percent\data.zip .\hyper
 .\model.h5
 
 python.exe test.py .\Data\Test\Test_10_percent\data.zip .\model.h5
+
 rd Tmp /s /q
+
 ###############################################################################################################################################################
 
 
